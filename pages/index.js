@@ -1,6 +1,19 @@
-import Head from 'next/head'
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-export default function Home() {
+
+
+import Head from 'next/head'
+const MetaHash = require('metahash-js');
+
+
+
+
+
+
+
+
+function Home(tokenInfoResult) {
   return (
     <div className="container">
       <Head>
@@ -207,3 +220,41 @@ export default function Home() {
     </div>
   )
 }
+
+export async function getServerSideProps() {
+
+
+	  // Call an external API endpoint to get posts.
+    // You can use any data fetching library
+    const Wallet = MetaHash.Wallet;
+    const API = MetaHash.API;
+    const api = new API();
+    const count_tests = 1;
+    const address = "0x00490ae7ebcb23e8eaca6e6134104a55076c85dfd18673b555";
+    const count_addresses = 1;
+    //const nodes = await API.getNodes('main');
+
+   const tokenInfoResult = await api.fetchBalance({ address: address });
+   console.log(tokenInfoResult);
+
+    
+
+
+
+
+
+
+
+    return {
+        props: {
+          tokenInfoResult,  
+        },
+    }
+}
+
+
+
+
+
+
+export default Home
