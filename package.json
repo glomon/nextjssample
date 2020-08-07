@@ -13,6 +13,7 @@
     "next": "9.5.1",
     "react": "16.13.1",
     "react-dom": "16.13.1",
+    "react-hook-form": "^6.3.0",
     "uikit": "^3.5.6-dev.12f0bbf60"
   }
 }

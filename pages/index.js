@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
+import { useForm } from "react-hook-form";
 
 
 import Link from "next/link";
@@ -9,8 +9,8 @@ import Head from 'next/head'
 const MetaHash = require('metahash-js');
 
 
-var address = '0x004871f4ca28c304a7bed2e6c14a98e8837d1dc673108fe7dc';
-
+var address = '0x0037f57bab204dd99ebcc84ac9d46a23fa0561cd65c1782f24';
+var kekec = [];
 
 
 
@@ -19,7 +19,21 @@ var address = '0x004871f4ca28c304a7bed2e6c14a98e8837d1dc673108fe7dc';
 function Home({balanceResult}) {
  
  	var linkec = "https://venus.mhscan.com/?page=address&id=" + balanceResult.address;
-  console.log(balanceResult.address);
+ 	//console.log(balanceResult);
+ 	
+ 	const { register, handleSubmit, watch, errors } = useForm();
+  const onSubmit = data => {
+   // console.log(data);
+    kekec = data[0];
+	console.log(watch(kekec));
+    //address = kekec;
+    }; // your form submit function which will invoke after successful validation
+
+  console.log(watch("example")); // you can watch individual input by pass the name of the input
+
+ 	
+ 	
+ 	
   return (
     <div className="container">
       <Head>
@@ -37,6 +51,15 @@ function Home({balanceResult}) {
         </p>
 
         <div className="grid">
+        
+         <form onSubmit={handleSubmit(onSubmit)}>
+      <label className="description">Address: </label>
+      <input name="example" className="formwidth"  defaultValue={kekec} ref={register} />
+    
+      <input type="submit"  />
+    </form>
+        
+        
           <a href={linkec} target="_blank" className="card">
             <h3>Wallet Address &rarr;</h3>
             <p>{  balanceResult.address  }</p>
@@ -144,6 +167,11 @@ function Home({balanceResult}) {
         .description {
           line-height: 1.5;
           font-size: 1.5rem;
+        }
+        
+        .formwidth {
+         font-size: 1rem;
+         width:500px;
         }
 
         code {
